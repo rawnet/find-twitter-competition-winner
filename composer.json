@@ -1,0 +1,13 @@
+{
+    "name": "jfinch/find-twitter-competition-winner",
+    "type": "project",
+    "require": {
+        "abraham/twitteroauth": "^0.7.2"
+    },
+    "authors": [
+        {
+            "name": "Jonathan Finch",
+            "email": "thefinchmeister@gmail.com"
+        }
+    ]
+}
