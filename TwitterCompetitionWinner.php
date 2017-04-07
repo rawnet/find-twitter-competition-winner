@@ -9,10 +9,10 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 $connection = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
 
 $count = 100;
-$winningStrings = ['Winning string1', 'Winning string2'];
+$winningStrings = ['@rasmus', 'Rasmus Lerdorf'];
 $q = '@rawnet';
 $sinceId = '849918275781877760';
-$maxId = '949918275781877760'; // Set an arbitrarily high max id
+$maxId = '';
 
 $tweets = [];
 $noOfTweets = 0;
@@ -28,7 +28,7 @@ do {
 foreach ($tweets as $tweet) {
 
     foreach ($winningStrings as $winningString) {
-        if (strpos($tweet->text, $winningString) !== false) {
+        if (strpos(strtolower($tweet->text), strtolower($winningString)) !== false) {
             $potentialWinners[] = $tweet->user->name;
             $potentiallyWinningTweet[$tweet->user->name][] = $tweet;
             break;
@@ -52,6 +52,7 @@ if (empty($potentialWinners)) {
     exit(0);
 }
 $winner = $potentialWinners[mt_rand(0, count($potentialWinners) - 1)];
+echo implode(PHP_EOL, $potentialWinners);
 echo "The winner is $winner".PHP_EOL;
 $winningTweet = $potentiallyWinningTweet[$winner][mt_rand(0, count($potentiallyWinningTweet[$winner]) - 1)];
-echo "Winning tweet: '$winningTweet->text' sent at $winningTweet->created_at";
+echo "Winning tweet: '$winningTweet->text' sent at $winningTweet->created_at".PHP_EOL;
